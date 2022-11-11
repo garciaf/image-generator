@@ -1,0 +1,12 @@
+%section.overflow-hidden.text-gray-700.px-5.py-2.mx-auto.lg:pt-12.lg:px-32
+  - @image_requests.each do |image_request|
+    %h2.text-2xl.leading-tight.mb-4.pb-4.border-b
+      = image_request.prompt
+      = "(#{image_request.size})"
+    .container.mb-4
+      .flex.flex-wrap.-m-1.md:-m-2
+        - image_request.generated_images.synced.each do |generated_image|
+          .flex.flex-wrap{:class => "w-1/3"}
+            .w-full.p-1.md:p-2
+              = link_to generated_image.url do
+                = image_tag generated_image.url, class: "block object-cover object-center w-full h-full rounded-lg"
