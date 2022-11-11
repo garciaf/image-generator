@@ -1,24 +1,31 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Ruby version
+- 3.0.2
 
-Things you may want to cover:
+## System dependencies
+You need to have access to the file `master.key` in order to be able to decrypt every credentials
 
-* Ruby version
+## Database creation
 
-* System dependencies
+```
+db:create
+db:schema:load
+```
 
-* Configuration
+## How to run the test suite
+```
+bundle exec rspec
+```
 
-* Database creation
+## Services (job queues, cache servers, search engines, etc.)
+### Tailwind
 
-* Database initialization
+To compile the css to only create what is needed
 
-* How to run the test suite
+```
+npx tailwindcss -i app/assets/stylesheets/application.css -o app/assets/stylesheets/wind.css --watch
+```
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Deployment instructions
+So far only meant to run locally on my computer, since the API usage is limited and it is bounded to a personal account
