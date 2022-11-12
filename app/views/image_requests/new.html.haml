@@ -1,0 +1,6 @@
+= form_with model: @image_request, class: 'w-full max-w-lg' do |form|
+  = form.label :prompt, class: 'block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+  = form.text_area :prompt, class: 'appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+  = form.label :size, class: 'block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+  = form.text_field :size, class: 'appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+  = form.submit

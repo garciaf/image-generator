@@ -3,7 +3,9 @@
     %h2.text-6xl.font-extrabold.dark:text-black.mb-3
       = image_request.prompt
       %small.text-base.ml-2.font-semibold.text-gray-500.dark:text-gray-400= image_request.size
+    = button_to image_request_images_path(image_request), method: :post do
+      Generate
     .container.mb-4
       .flex.flex-wrap.-m-1.md:-m-2
-        = render partial: 'generated_image', collection: image_request.synced_generated_images
+        = render partial: 'image', collection: image_request.images
 

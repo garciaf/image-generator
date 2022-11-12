@@ -1,0 +1,2 @@
+module ImageRequestHelper
+end

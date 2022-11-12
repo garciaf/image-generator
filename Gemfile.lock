@@ -94,6 +94,8 @@ GEM
       irb (>= 1.3.6)
       reline (>= 0.3.1)
     diff-lcs (1.5.0)
+    down (5.3.1)
+      addressable (~> 2.8)
     erubi (1.11.0)
     factory_bot (6.2.1)
       activesupport (>= 5.0.0)
@@ -260,6 +262,7 @@ DEPENDENCIES
   capybara
   database_cleaner-active_record
   debug
+  down (~> 5.0)
   factory_bot_rails
   faker
   haml

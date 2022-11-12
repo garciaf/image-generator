@@ -1,10 +1,9 @@
-describe GeneratedImage do
+describe ImageRequest do
   let(:image_request) { create :image_request }
-  let(:generated_image) { create :generated_image, image_request: image_request }
   let(:generated_image_url) { Faker::Internet.url }
-  describe '#sync!' do
-    it "call the api to retrieve a url picture" do
-      generated_image_url = Faker::Internet.url
+
+  describe '.retrieve_image!' do
+    it 'retrieve from api and store it locally' do
       stub_post = stub_request(:post, "https://api.openai.com/v1/images/generations")
                     .with(
                       body: {
@@ -21,22 +20,15 @@ describe GeneratedImage do
                           }
                         ]
                       }.to_json)
+      body_file = File.open(File.expand_path('./spec/fixtures/test.png'))
+      stub_get = stub_request(:get, generated_image_url)
+                  .to_return(body: body_file, status: 200)
+
       expect do
-        generated_image.sync!
+        image_request.retrieve_image!
         expect(stub_post).to have_been_requested
-      end.to change{ generated_image.reload.url }.from(nil).to(generated_image_url)
-    end
-
-    context "when url already been generated" do
-      let(:generated_image) { create :generated_image, image_request: image_request, url: generated_image_url }
-
-      it "does not recall the API" do
-        stub_post = stub_request(:post, "https://api.openai.com/v1/images/generations")
-        expect do
-        generated_image.sync!
-        expect(stub_post).to_not have_been_requested
-      end.not_to change{ generated_image.reload.url }
-      end
+        expect(stub_get).to have_been_requested
+      end.to change{ image_request.images.count }.by(1)
     end
   end
 end
