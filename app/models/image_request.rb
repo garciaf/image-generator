@@ -2,6 +2,7 @@ class ImageRequest < ApplicationRecord
   has_many_attached :images
 
   validates :prompt, :size, presence: true
+  attribute :size, :string, default: '1024x1024'
 
   def retrieve_image!
     store_image retrieve_image_url_from_api

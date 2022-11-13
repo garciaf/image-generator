@@ -2,6 +2,12 @@ describe ImageRequest do
   let(:image_request) { create :image_request }
   let(:generated_image_url) { Faker::Internet.url }
 
+  describe '.size' do
+    it 'has a default value' do
+      actual_result = described_class.new.size
+      expect(actual_result).to eq('1024x1024')
+    end
+  end
   describe '.retrieve_image!' do
     it 'retrieve from api and store it locally' do
       stub_post = stub_request(:post, "https://api.openai.com/v1/images/generations")
