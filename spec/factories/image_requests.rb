@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :image_request do
     prompt { Faker::Movie.quote }
-    size { "#{Faker::Number.number(digits: 10)}x#{Faker::Number.number(digits: 10)}"}
+    size { "#{Faker::Number.number(digits: 10)}x#{Faker::Number.number(digits: 10)}" }
 
     trait :with_image do
       after(:build) do |image_request|
@@ -11,6 +11,5 @@ FactoryBot.define do
         )
       end
     end
-
   end
 end
