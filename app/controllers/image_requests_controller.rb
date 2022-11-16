@@ -7,9 +7,21 @@ class ImageRequestsController < ApplicationController
     @image_request = ImageRequest.new(image_request_params)
     if @image_request.save
       flash[:notice] = "Image request was successfully created"
-      redirect_to(root_path)
+      respond_to do |format|
+        format.turbo_stream { render turbo_stream: turbo_stream.prepend("image_requests", @image_request)}
+        format.html { redirect_to(root_path) }
+      end
     else
       render 'new'
+    end
+  end
+
+  def destroy
+    @image_request = ImageRequest.find(params[:id])
+    @image_request.destroy!
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@image_request) }
+      format.html { redirect_to(root_path) }
     end
   end
 

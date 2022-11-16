@@ -8,6 +8,26 @@ RSpec.describe "/image_requests", type: :request do
     end
   end
 
+  describe "DELETE /destroy" do
+    let(:image_request) { create :image_request }
+    before do
+      image_request
+    end
+    it "allow to destroy image request" do
+      expect do
+        delete image_request_path(image_request)
+      end.to change(ImageRequest, :count).by(-1)
+    end
+    context "when image request have images" do
+      let(:image_request) { create :image_request, :with_image }
+      it "allow to destroy image request" do
+        expect do
+          delete image_request_path(image_request)
+        end.to change(ImageRequest, :count).by(-1)
+      end
+    end
+  end
+
   describe "POST /create" do
     let(:prompt) { Faker::Movie.quote }
     let(:size) { "#{Faker::Number.number(digits: 10)}x#{Faker::Number.number(digits: 10)}"}

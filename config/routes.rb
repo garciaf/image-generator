@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :image_requests, only: [:new, :create] do
+  resources :image_requests, only: [:new, :create, :destroy] do
     resources :images, only: :create
   end
 
