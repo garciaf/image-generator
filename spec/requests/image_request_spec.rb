@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe '/image_requests', type: :request do
+  let(:image_request) { create :image_request }
   describe 'GET /new' do
     it 'returns http success' do
       get new_image_request_path
@@ -8,8 +9,15 @@ RSpec.describe '/image_requests', type: :request do
     end
   end
 
+  describe 'GET /show' do
+    it 'return the image request details' do
+      get(image_request_path(image_request))
+      expect(response).to have_http_status(:success)
+      expect(response_text).to include(image_request.prompt)
+    end
+  end
+
   describe 'DELETE /destroy' do
-    let(:image_request) { create :image_request }
     before do
       image_request
     end
