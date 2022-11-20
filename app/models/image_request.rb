@@ -10,7 +10,6 @@ class ImageRequest < ApplicationRecord
 
   def retrieve_image!
     store_image retrieve_image_url_from_api
-    broadcast_replace_to self
   end
 
   private
