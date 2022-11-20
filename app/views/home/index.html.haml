@@ -1,4 +1,3 @@
-= turbo_frame_tag "new_image_request", src: new_image_request_path, target: "_top"
 = turbo_stream_from "image_requests"
 = turbo_frame_tag "image_requests" do
  = render partial: 'image_requests/image_request', collection: @image_requests

@@ -1,7 +1,17 @@
-= turbo_frame_tag "new_image_request", target: "_top" do
-  = form_with model: @image_request, class: 'w-full max-w-lg' do |form|
-    = form.label :prompt, class: 'block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
-    = form.text_area :prompt, class: 'appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
-    = form.label :size, class: 'block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
-    = form.text_field :size, class: 'appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
-    = form.button class: 'px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out'
+= turbo_frame_tag "modal" do
+  .fixed.z-10.inset-0.overflow-y-auto{"aria-labelledby" => "modal-title", "aria-modal" => "true", :role => "dialog"}
+    .flex.items-end.justify-center.min-h-screen.pt-4.px-4.pb-20.text-center.sm:block.sm:p-0
+      .fixed.inset-0.bg-gray-500.bg-opacity-75.ease-in.ease-out.transition-opacity.duration-700{"aria-hidden" => "true"}
+      / This element is to trick the browser into centering the modal contents.
+      %span.hidden.sm:inline-block.sm:align-middle.sm:h-screen{"aria-hidden" => "true"} ​
+      /
+        Modal panel, show/hide based on modal state.
+        Entering: "ease-out duration-700"
+        From: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+        To: "opacity-100 translate-y-0 sm:scale-100"
+        Leaving: "ease-in duration-200"
+        From: "opacity-100 translate-y-0 sm:scale-100"
+        To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+      .inline-block.align-bottom.bg-white.rounded-lg.px-4.pt-5.pb-4.text-left.overflow-hidden.shadow-xl.transform.transition-all.ease-in.ease-out.duration-700.sm:my-8.sm:align-middle.sm:max-w-lg.sm:w-full.sm:p-6
+        %h1.text-gray-800.font-semibold.text-xl.mb-4 New Request
+        = render 'form', image_request: @image_request
