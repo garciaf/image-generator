@@ -4,10 +4,13 @@ class ImageRequest < ApplicationRecord
   validates :prompt, :size, presence: true
   attribute :size, :string, default: '1024x1024'
 
-  broadcasts
+  after_create_commit -> { broadcast_prepend_to 'image_requests' }
+  after_destroy_commit -> { broadcast_remove_to 'image_requests' }
+  after_update_commit -> { broadcast_replace_to 'image_requests' }
 
   def retrieve_image!
     store_image retrieve_image_url_from_api
+    broadcast_replace_to self
   end
 
   private
