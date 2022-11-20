@@ -13,6 +13,14 @@ db:create
 db:schema:load
 ```
 
+## How to run the code locally
+
+```
+./bin/dev
+```
+then the application will run under http://localhost:5000/
+You can change the default port by using a variable environment `PORT` with the value of your choice
+
 ## How to run the test suite
 ```
 bundle exec rspec
