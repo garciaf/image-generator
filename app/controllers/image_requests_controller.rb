@@ -13,6 +13,7 @@ class ImageRequestsController < ApplicationController
     if @image_request.save
       flash[:notice] = 'Image request was successfully created'
       respond_to do |format|
+        format.turbo_stream {}
         format.html { redirect_to(root_path) }
       end
     else
@@ -24,9 +25,10 @@ class ImageRequestsController < ApplicationController
             locals: {
               image_request: @image_request
             }
-          ))
+          ),
+                 status: :bad_request)
         end
-        format.html { render 'new' }
+        format.html { render 'new', status: :bad_request }
       end
 
     end
@@ -36,6 +38,7 @@ class ImageRequestsController < ApplicationController
     @image_request.destroy!
     respond_to do |format|
       format.html { redirect_to(root_path) }
+      format.turbo_stream {}
     end
   end
 
