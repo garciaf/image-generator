@@ -1,5 +1,5 @@
 = turbo_stream_from "image_requests"
 = turbo_frame_tag "image_requests" do
- = render partial: 'image_requests/image_request', collection: @image_requests
+ = render partial: 'image_request', collection: @image_requests
 .text-center.my-10= will_paginate @image_requests
 = render 'footer'

@@ -2,6 +2,25 @@ require 'rails_helper'
 
 RSpec.describe '/image_requests', type: :request do
   let(:image_request) { create :image_request }
+
+  describe 'GET /index' do
+    let!(:image_request) { create :image_request, :with_image }
+
+    it 'return the previous request' do
+      get image_requests_path
+
+      expect(response_text).to include(image_request.prompt)
+      expect(response.body).to include('<img')
+    end
+
+    it 'is accessible from the root path' do
+      get root_path
+
+      expect(response_text).to include(image_request.prompt)
+      expect(response.body).to include('<img')
+    end
+  end
+
   describe 'GET /new' do
     it 'returns http success' do
       get new_image_request_path

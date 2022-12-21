@@ -10,6 +10,7 @@
     = javascript_importmap_tags
   %body
     = render 'layouts/header'
-    %section.overflow-hidden.text-gray-700.px-5.py-10.mx-auto.lg:pt-12.lg:px-32
+    %section.overflow-hidden.text-gray-700.px-5.py-5.mx-auto
       = yield
+    = yield :footer
   = turbo_frame_tag 'modal'

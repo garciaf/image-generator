@@ -2,6 +2,16 @@ class ImageRequestsController < ApplicationController
   before_action :find_image_request, only: [:show, :destroy]
   include ActionView::RecordIdentifier
 
+  def index
+    @image_requests = ImageRequest
+                      .with_attached_images
+                      .order(created_at: :desc)
+                      .paginate(
+                        page: params[:page],
+                        per_page: 5
+                      )
+  end
+
   def new
     @image_request = ImageRequest.new
   end
