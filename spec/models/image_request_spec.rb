@@ -15,7 +15,8 @@ describe ImageRequest do
                     body: {
                       prompt: image_request.prompt,
                       n: 1,
-                      size: image_request.size
+                      size: image_request.size,
+                      model: 'dall-e-3'
                     }.to_json
                   )
                   .to_return(body: {

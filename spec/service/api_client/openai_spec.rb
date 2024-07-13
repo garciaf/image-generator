@@ -15,7 +15,8 @@ describe ApiClient::Openai do
                     body: {
                       prompt: prompt,
                       n: 1,
-                      size: size
+                      size: size,
+                      model: 'dall-e-3'
                     }.to_json
                   )
                   .to_return(body: {
